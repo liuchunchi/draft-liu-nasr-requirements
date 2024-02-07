@@ -19,11 +19,11 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: NASR Use Case and Requirements
+abbrev: nasr-req
 category: info
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-liu-nasr-requirements-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
