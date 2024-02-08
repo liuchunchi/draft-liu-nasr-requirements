@@ -122,10 +122,9 @@ The network element is not limited to Service Function-- it can also be devices 
 
 ## Use Case 2: Verifying Path Properties
 
-In use case 1, The orchestrated path is explict and specfic down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a path of a certain property, such as trustworthiness, security level, location, vendor, etc, from the operator. With NASR, the operator can orchestrate this path by selecting network elements with requested properties, attest to the path, and verifiably prove to the clients the traffic did follow this path.  
+In use case 1, The orchestrated path is explict and specfic down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a path of a certain property, such as trustworthiness, security level, location, vendor, etc, from the operator. With NASR, the operator can orchestrate this path by selecting network elements with requested properties, attest to the path, and verifiably prove to the clients the traffic did follow this path.
 
 Compared to the first use case, the order of the elements may not be important. This use case is more focused on validating the attributes of the path.
-
 
 ## Use Case 3: Sensitive Data Routing
 
@@ -133,14 +132,7 @@ Clients from specific industries such as finance, governments have very low tole
 
 Compared to the first and second use case, this use case also requires some preventive measures before a wrongful forwarding happens at the first place.
 
-
-## Use Case 4: Trustworthy Telemetry
-
-The current telemetry result is based on the security assumption that devices will submit their information truthfully. As the security infrastructure such as RATS are building up, NASR can utilize RATS-attested devices to create trustworthy telemetry results of a path.
-
-Compared to other use cases, this use case may not need attestation before the measurement.
-
-## Use Case 5: Ingress Filtering
+## Use Case 4: Ingress Filtering
 
 Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks {{RFC8704}}{{RFC5635}}. It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate.
 
@@ -154,7 +146,7 @@ Ingress Filtering techniques, such as uRPF, help prevent source IP address spoof
 
 All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet DID transit certain network elements. A secure POT mechanism should truthfully reflect the identity of the network element and its attributes. The "attribute" could be different:
 
- - For simple POT, the "attribute" means the path it is on, and the relative index of this element on the path. This is the goal of POT mechanism defined in {{-CISCOPOT}}.
+ - For simple POT, the "attribute" means the path it is on, and its relative position/order on the path. This is the goal of POT mechanism defined in {{-CISCOPOT}}.
 
  - For richer POT, the "attribute" means it could be a list of attributes: trustworthiness, security capabilities it has, geolocation, vendor, etc. This needs the definition of attributes of a network element, which is discussed in {{reqattributes}}
 
@@ -167,7 +159,7 @@ The most appropriate POT mechanism for each scenarios may differ-- inter-domain 
 
 ### Per-hop POT header extensions
 
-POT should be either encapsulated and passed along the original path, or sent out-of-band. It depends on the different operation modes: who should verify the POT (other elements on the path, the end host, or external security operation center (SOC)), timeliness of verification, etc.
+POT could be either encapsulated and passed along the original path, or sent out-of-band. It depends on the different operation modes: who should verify the POT (other elements on the path, the end host, or external security operation center (SOC)), timeliness of verification, etc.
 
 When the POT is passed along the path, it should be encapsulated in hop-by-hop header extensions, such as IPv6 hop-by-hop options header, In-situ OAM hop-by-hop option etc. Exact size and specifications of data fields are subject to different POT mechanisms.
 
@@ -188,7 +180,7 @@ Such attributes/claims/attestation results can reuse existing specifications, fo
     swversion
     location
 
-Some claim extensions can be made:
+Some new claim extensions can be made:
 
     elemtype
     pathid
@@ -209,7 +201,7 @@ After a path is selected, it should be
   1. commited to prevent changes,
   2. publicized for common referencing and retrival.
 
-The path should be stored as a univeral ID, all network elements on the path, and attributes of them.
+The stored path should contain these information: univeral ID, all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
 
 TBA
 
@@ -230,9 +222,9 @@ Since this part is research-related, NASR will work with PANRG and Academia for 
 
 ## Future Requirement 2: Packet Steering and Preventive Mechanisms
 
-In sensitive data routing use case, it is certainly necessary to know and verify the transit path of a packet using POT mechanisms. However, it is too late to have the data already exposed to the insecure devices and risk leakage. There should be packet steering mechanisms or other preventive measures that help traffic stay in the desired path. For example, doing an egress filtering check before sending to the next hop, preventing sending packet to a device with non-desirable attribute.
+In sensitive data routing use case, it is certainly necessary to know and verify the transit path of a packet using POT mechanisms. However, it might be too late to have the data already exposed to the insecure devices and risk leakage. There should be packet steering mechanisms or other preventive measures that help traffic stay in the desired path. For example, doing an egress check before sending to the next hop, preventing sending packet to a device with a non-desirable attribute.
 
-The mailing list and side meeting has received requests to this requirement, but also agreed this may not be part of the initial scope of NASR-- it is a topic to be included in the next stage of NASR when rechartering.
+The mailing list and side meeting has received requests to this requirement, it should fall in NASR interest, but also agreed this may not be part of the initial scope of NASR-- it is a topic to be included in the next stage of NASR when rechartering.
 
 
 # Commonly Asked Questions and Answers
@@ -241,7 +233,7 @@ The mailing list and side meeting has received requests to this requirement, but
 
 ## Why not use static routing?
 
-Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Also, even static routing is used, we still need proof of transit for compliance check.
+Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Flexible orchestration of paths will be prohibited. Also, even static routing is used, we still need proof of transit for compliance check.
 
 ## Initially targeting for intradomain or interdomain scenario?
 
@@ -251,14 +243,13 @@ Static routing severely limits the scalability and flexibility for performance o
 
 ## Does all nodes on the path need to compute the POT?
 
-No. In SFC use case, we are only interested in verifying the traffic _did_ pass certain elements of interest.
-
-Please create **Github issues** to raise a question.
+Whether the validation is strict or loose is dependent on the scenario. For example in SFC use case, we are only interested in verifying some important elements of interes processed the traffic.
 
 # Contributors
 
 This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Diego Lopez, Luigi Iannone, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
 
+Please create **Github issues** to raise a question.
 Please create new commits and **Github Pull Requests** to propose new contents.
 
 
