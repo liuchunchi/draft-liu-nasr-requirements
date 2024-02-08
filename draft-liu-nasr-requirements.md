@@ -249,7 +249,7 @@ Whether the validation is strict or loose is dependent on the scenario. For exam
 
 This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Diego Lopez, Luigi Iannone, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
 
-Please create **Github issues** to raise a question.
+Please create **Github issues** to comment, or raise a question.
 Please create new commits and **Github Pull Requests** to propose new contents.
 
 
