@@ -72,8 +72,7 @@ Table of Contents
      5.1.  Use Case 1: Network Path Validation
      5.2.  Use Case 2: Verifying Path Properties
      5.3.  Use Case 3: Sensitive Data Routing
-     5.4.  Use Case 4: Trustworthy Telemetry
-     5.5.  Use Case 5: Ingress Filtering
+     5.4.  Use Case 4: Ingress Filtering
    6.  Requirements
      6.1.  Requirement 1: Proof-of-Transit (POT) Mechanisms
        6.1.1.  Per-hop POT header extensions
@@ -181,15 +180,16 @@ Table of Contents
 
    In use case 1, The orchestrated path is explict and specfic down to
    each network element.  Sometimes, the client does not need to know
-   every detail.  Rather, the clients will request a property at the
-   path level, such as trustworthiness, security level, location,
-   vendor, etc, which is collectively defined by all the elements on the
-   path.  The clients will also need a verifiable and unforgeable proof
-   at the path level, in a collective way.
+   every detail.  Rather, the clients will request a path of a certain
+   property, such as trustworthiness, security level, location, vendor,
+   etc, from the operator.  With NASR, the operator can orchestrate this
+   path by selecting network elements with requested properties, attest
+   to the path, and verifiably prove to the clients the traffic did
+   follow this path.
 
    Compared to the first use case, the order of the elements may not be
    important.  This use case is more focused on validating the
-   attributes of the path, rather than a very specific ordered path.
+   attributes of the path.
 
 5.3.  Use Case 3: Sensitive Data Routing
 
@@ -203,21 +203,11 @@ Table of Contents
    willing to pay a premium for high data routing security guarantees.
    NASR can detect for such violations and make corrections promptly.
 
-   Compared to the first and second use case, this use case requires
-   some preventive measures before a wrongful forwarding takes place,
-   preferably.
+   Compared to the first and second use case, this use case also
+   requires some preventive measures before a wrongful forwarding
+   happens at the first place.
 
-5.4.  Use Case 4: Trustworthy Telemetry
-
-   The current telemetry result is based on the security assumption that
-   devices will submit truthfully.  As the security infrastructure such
-   as RATS are building up, NASR can utilize RATS-attested devices to
-   create trustworthy telemetry results of a path.
-
-   Compared to other use cases, this use case may not need attestation
-   before the measurement.
-
-5.5.  Use Case 5: Ingress Filtering
+5.4.  Use Case 4: Ingress Filtering
 
    Ingress Filtering techniques, such as uRPF, help prevent source IP
    address spoofing and denial-of-service (DoS) attacks
@@ -241,9 +231,9 @@ Table of Contents
    reflect the identity of the network element and its attributes.  The
    "attribute" could be different:
 
-   *  For simple POT, the "attribute" means the path it is on, and the
-      relative index of this element on the path.  This is the goal of
-      POT mechanism defined in [I-D.ietf-sfc-proof-of-transit-08].
+   *  For simple POT, the "attribute" means the path it is on, and its
+      relative position/order on the path.  This is the goal of POT
+      mechanism defined in [I-D.ietf-sfc-proof-of-transit-08].
 
    *  For richer POT, the "attribute" means it could be a list of
       attributes: trustworthiness, security capabilities it has,
@@ -260,7 +250,7 @@ Table of Contents
 
 6.1.1.  Per-hop POT header extensions
 
-   POT should be either encapsulated and passed along the original path,
+   POT could be either encapsulated and passed along the original path,
    or sent out-of-band.  It depends on the different operation modes:
    who should verify the POT (other elements on the path, the end host,
    or external security operation center (SOC)), timeliness of
@@ -300,7 +290,7 @@ Table of Contents
    swversion
    location
 
-   Some claim extensions can be made:
+   Some new claim extensions can be made:
 
    elemtype
    pathid
@@ -322,8 +312,9 @@ Table of Contents
 
    2.  publicized for common referencing and retrival.
 
-   The path should be stored as a univeral ID, all network elements on
-   the path, and attributes of them.
+   The stored path should contain these information: univeral ID, all
+   network elements on the path, and attributes of them.  (Schemas may
+   vary depending on scenarios)
 
    TBA
 
@@ -361,17 +352,17 @@ Table of Contents
 
    In sensitive data routing use case, it is certainly necessary to know
    and verify the transit path of a packet using POT mechanisms.
-   However, it is too late to have the data already exposed to the
+   However, it might be too late to have the data already exposed to the
    insecure devices and risk leakage.  There should be packet steering
    mechanisms or other preventive measures that help traffic stay in the
-   desired path.  For example, doing an egress filtering check before
-   sending to the next hop, preventing sending packet to a device with
-   non-desirable attribute.
+   desired path.  For example, doing an egress check before sending to
+   the next hop, preventing sending packet to a device with a non-
+   desirable attribute.
 
    The mailing list and side meeting has received requests to this
-   requirement, but also agreed this may not be part of the initial
-   scope of NASR-- it is a topic to be included in the next stage of
-   NASR when rechartering.
+   requirement, it should fall in NASR interest, but also agreed this
+   may not be part of the initial scope of NASR-- it is a topic to be
+   included in the next stage of NASR when rechartering.
 
 8.  Commonly Asked Questions and Answers
 
@@ -380,8 +371,9 @@ Table of Contents
 8.1.  Why not use static routing?
 
    Static routing severely limits the scalability and flexibility for
-   performance optimizations and reconfigurations.  Also, even static
-   routing is used, we still need proof of transit for compliance check.
+   performance optimizations and reconfigurations.  Flexible
+   orchestration of paths will be prohibited.  Also, even static routing
+   is used, we still need proof of transit for compliance check.
 
 8.2.  Initially targeting for intradomain or interdomain scenario?
 
@@ -389,10 +381,9 @@ Table of Contents
 
 8.4.  Does all nodes on the path need to compute the POT?
 
-   No.  In SFC use case, we are only interested in verifying the traffic
-   _did_ pass certain elements of interest.
-
-   Please create *Github issues* to raise a question.
+   Whether the validation is strict or loose is dependent on the
+   scenario.  For example in SFC use case, we are only interested in
+   verifying some important elements of interes processed the traffic.
 
 9.  Contributors
 
@@ -401,8 +392,8 @@ Table of Contents
    limited to: Andrew Alston, Meiling Chen, Diego Lopez, Luigi Iannone,
    Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
 
-   Please create new commits and *Github Pull Requests* to propose new
-   contents.
+   Please create *Github issues* to raise a question.  Please create new
+   commits and *Github Pull Requests* to propose new contents.
 
 10.  Security Considerations
 

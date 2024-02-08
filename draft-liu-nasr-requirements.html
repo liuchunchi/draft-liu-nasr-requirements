@@ -1152,10 +1152,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-use-case-3-sensitive-data-r" class="internal xref">Use Case 3: Sensitive Data Routing</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-use-case-4-trustworthy-tele" class="internal xref">Use Case 4: Trustworthy Telemetry</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
-                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.  <a href="#name-use-case-5-ingress-filterin" class="internal xref">Use Case 5: Ingress Filtering</a></p>
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-use-case-4-ingress-filterin" class="internal xref">Use Case 4: Ingress Filtering</a></p>
 </li>
             </ul>
 </li>
@@ -1335,8 +1332,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-use-case-2-verifying-path-p">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-use-case-2-verifying-path-p" class="section-name selfRef">Use Case 2: Verifying Path Properties</a>
         </h3>
-<p id="section-5.2-1">In use case 1, The orchestrated path is explict and specfic down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a property at the path level, such as trustworthiness, security level, location, vendor, etc, which is collectively defined by all the elements on the path. The clients will also need a verifiable and unforgeable proof at the path level, in a collective way.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">Compared to the first use case, the order of the elements may not be important. This use case is more focused on validating the attributes of the path, rather than a very specific ordered path.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">In use case 1, The orchestrated path is explict and specfic down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a path of a certain property, such as trustworthiness, security level, location, vendor, etc, from the operator. With NASR, the operator can orchestrate this path by selecting network elements with requested properties, attest to the path, and verifiably prove to the clients the traffic did follow this path.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">Compared to the first use case, the order of the elements may not be important. This use case is more focused on validating the attributes of the path.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="use-case-3-sensitive-data-routing">
@@ -1345,24 +1342,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-use-case-3-sensitive-data-r" class="section-name selfRef">Use Case 3: Sensitive Data Routing</a>
         </h3>
 <p id="section-5.3-1">Clients from specific industries such as finance, governments have very low tolerance of data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some compliance requirements also prohibit customer data escape a specific geolocation without permission. To avoid data leakage risks and compliance risks, some clients are willing to pay a premium for high data routing security guarantees. NASR can detect for such violations and make corrections promptly.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">Compared to the first and second use case, this use case requires some preventive measures before a wrongful forwarding takes place, preferably.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">Compared to the first and second use case, this use case also requires some preventive measures before a wrongful forwarding happens at the first place.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="use-case-4-trustworthy-telemetry">
+<div id="use-case-4-ingress-filtering">
 <section id="section-5.4">
-        <h3 id="name-use-case-4-trustworthy-tele">
-<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-use-case-4-trustworthy-tele" class="section-name selfRef">Use Case 4: Trustworthy Telemetry</a>
+        <h3 id="name-use-case-4-ingress-filterin">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-use-case-4-ingress-filterin" class="section-name selfRef">Use Case 4: Ingress Filtering</a>
         </h3>
-<p id="section-5.4-1">The current telemetry result is based on the security assumption that devices will submit truthfully. As the security infrastructure such as RATS are building up, NASR can utilize RATS-attested devices to create trustworthy telemetry results of a path.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
-<p id="section-5.4-2">Compared to other use cases, this use case may not need attestation before the measurement.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="use-case-5-ingress-filtering">
-<section id="section-5.5">
-        <h3 id="name-use-case-5-ingress-filterin">
-<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-use-case-5-ingress-filterin" class="section-name selfRef">Use Case 5: Ingress Filtering</a>
-        </h3>
-<p id="section-5.5-1">Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks <span>[<a href="#RFC8704" class="cite xref">RFC8704</a>]</span><span>[<a href="#RFC5635" class="cite xref">RFC5635</a>]</span>. It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-1">Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks <span>[<a href="#RFC8704" class="cite xref">RFC8704</a>]</span><span>[<a href="#RFC5635" class="cite xref">RFC5635</a>]</span>. It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1381,7 +1369,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <p id="section-6.1-1">All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet DID transit certain network elements. A secure POT mechanism should truthfully reflect the identity of the network element and its attributes. The "attribute" could be different:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6.1-2.1">
-            <p id="section-6.1-2.1.1">For simple POT, the "attribute" means the path it is on, and the relative index of this element on the path. This is the goal of POT mechanism defined in <span>[<a href="#I-D.ietf-sfc-proof-of-transit-08" class="cite xref">I-D.ietf-sfc-proof-of-transit-08</a>]</span>.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
+            <p id="section-6.1-2.1.1">For simple POT, the "attribute" means the path it is on, and its relative position/order on the path. This is the goal of POT mechanism defined in <span>[<a href="#I-D.ietf-sfc-proof-of-transit-08" class="cite xref">I-D.ietf-sfc-proof-of-transit-08</a>]</span>.<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-6.1-2.2">
             <p id="section-6.1-2.2.1">For richer POT, the "attribute" means it could be a list of attributes: trustworthiness, security capabilities it has, geolocation, vendor, etc. This needs the definition of attributes of a network element, which is discussed in <a href="#reqattributes" class="auto internal xref">Section 6.2</a><a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
@@ -1394,7 +1382,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
           <h4 id="name-per-hop-pot-header-extensio">
 <a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-per-hop-pot-header-extensio" class="section-name selfRef">Per-hop POT header extensions</a>
           </h4>
-<p id="section-6.1.1-1">POT should be either encapsulated and passed along the original path, or sent out-of-band. It depends on the different operation modes: who should verify the POT (other elements on the path, the end host, or external security operation center (SOC)), timeliness of verification, etc.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1.1-1">POT could be either encapsulated and passed along the original path, or sent out-of-band. It depends on the different operation modes: who should verify the POT (other elements on the path, the end host, or external security operation center (SOC)), timeliness of verification, etc.<a href="#section-6.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1.1-2">When the POT is passed along the path, it should be encapsulated in hop-by-hop header extensions, such as IPv6 hop-by-hop options header, In-situ OAM hop-by-hop option etc. Exact size and specifications of data fields are subject to different POT mechanisms.<a href="#section-6.1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1424,7 +1412,7 @@ swversion
 location
 </pre><a href="#section-6.2-3" class="pilcrow">¶</a>
 </div>
-<p id="section-6.2-4">Some claim extensions can be made:<a href="#section-6.2-4" class="pilcrow">¶</a></p>
+<p id="section-6.2-4">Some new claim extensions can be made:<a href="#section-6.2-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.2-5">
 <pre>
 elemtype
@@ -1453,7 +1441,7 @@ vendor
             <p id="section-6.3-2.2.1">publicized for common referencing and retrival.<a href="#section-6.3-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ol>
-<p id="section-6.3-3">The path should be stored as a univeral ID, all network elements on the path, and attributes of them.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.3-3">The stored path should contain these information: univeral ID, all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 <p id="section-6.3-4">TBA<a href="#section-6.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1481,8 +1469,8 @@ Second, under certain circumstances, PONT can be <em>inferred</em> from POT. For
         <h3 id="name-future-requirement-2-packet">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-future-requirement-2-packet" class="section-name selfRef">Future Requirement 2: Packet Steering and Preventive Mechanisms</a>
         </h3>
-<p id="section-7.2-1">In sensitive data routing use case, it is certainly necessary to know and verify the transit path of a packet using POT mechanisms. However, it is too late to have the data already exposed to the insecure devices and risk leakage. There should be packet steering mechanisms or other preventive measures that help traffic stay in the desired path. For example, doing an egress filtering check before sending to the next hop, preventing sending packet to a device with non-desirable attribute.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<p id="section-7.2-2">The mailing list and side meeting has received requests to this requirement, but also agreed this may not be part of the initial scope of NASR-- it is a topic to be included in the next stage of NASR when rechartering.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">In sensitive data routing use case, it is certainly necessary to know and verify the transit path of a packet using POT mechanisms. However, it might be too late to have the data already exposed to the insecure devices and risk leakage. There should be packet steering mechanisms or other preventive measures that help traffic stay in the desired path. For example, doing an egress check before sending to the next hop, preventing sending packet to a device with a non-desirable attribute.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-2">The mailing list and side meeting has received requests to this requirement, it should fall in NASR interest, but also agreed this may not be part of the initial scope of NASR-- it is a topic to be included in the next stage of NASR when rechartering.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1498,7 +1486,7 @@ Second, under certain circumstances, PONT can be <em>inferred</em> from POT. For
         <h3 id="name-why-not-use-static-routing">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-why-not-use-static-routing" class="section-name selfRef">Why not use static routing?</a>
         </h3>
-<p id="section-8.1-1">Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Also, even static routing is used, we still need proof of transit for compliance check.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Flexible orchestration of paths will be prohibited. Also, even static routing is used, we still need proof of transit for compliance check.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="initially-targeting-for-intradomain-or-interdomain-scenario">
@@ -1520,8 +1508,7 @@ Second, under certain circumstances, PONT can be <em>inferred</em> from POT. For
         <h3 id="name-does-all-nodes-on-the-path-">
 <a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-does-all-nodes-on-the-path-" class="section-name selfRef">Does all nodes on the path need to compute the POT?</a>
         </h3>
-<p id="section-8.4-1">No. In SFC use case, we are only interested in verifying the traffic <em>did</em> pass certain elements of interest.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
-<p id="section-8.4-2">Please create <strong>Github issues</strong> to raise a question.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-1">Whether the validation is strict or loose is dependent on the scenario. For example in SFC use case, we are only interested in verifying some important elements of interes processed the traffic.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1532,7 +1519,8 @@ Second, under certain circumstances, PONT can be <em>inferred</em> from POT. For
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-contributors" class="section-name selfRef">Contributors</a>
       </h2>
 <p id="section-9-1">This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Diego Lopez, Luigi Iannone, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">Please create new commits and <strong>Github Pull Requests</strong> to propose new contents.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-2">Please create <strong>Github issues</strong> to raise a question.
+Please create new commits and <strong>Github Pull Requests</strong> to propose new contents.<a href="#section-9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
