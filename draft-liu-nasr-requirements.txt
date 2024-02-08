@@ -392,8 +392,9 @@ Table of Contents
    limited to: Andrew Alston, Meiling Chen, Diego Lopez, Luigi Iannone,
    Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
 
-   Please create *Github issues* to raise a question.  Please create new
-   commits and *Github Pull Requests* to propose new contents.
+   Please create *Github issues* to comment, or raise a question.
+   Please create new commits and *Github Pull Requests* to propose new
+   contents.
 
 10.  Security Considerations
 
