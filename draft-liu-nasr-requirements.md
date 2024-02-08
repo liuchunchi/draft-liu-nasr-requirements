@@ -122,21 +122,21 @@ The network element is not limited to Service Function-- it can also be devices 
 
 ## Use Case 2: Verifying Path Properties
 
-In use case 1, The orchestrated path is explict and specfic down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a property at the path level, such as trustworthiness, security level, location, vendor, etc, which is collectively defined by all the elements on the path. The clients will also need a verifiable and unforgeable proof at the path level, in a collective way.
+In use case 1, The orchestrated path is explict and specfic down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a path of a certain property, such as trustworthiness, security level, location, vendor, etc, from the operator. With NASR, the operator can orchestrate this path by selecting network elements with requested properties, attest to the path, and verifiably prove to the clients the traffic did follow this path.  
 
-Compared to the first use case, the order of the elements may not be important. This use case is more focused on validating the attributes of the path, rather than a very specific ordered path.
+Compared to the first use case, the order of the elements may not be important. This use case is more focused on validating the attributes of the path.
 
 
 ## Use Case 3: Sensitive Data Routing
 
 Clients from specific industries such as finance, governments have very low tolerance of data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some compliance requirements also prohibit customer data escape a specific geolocation without permission. To avoid data leakage risks and compliance risks, some clients are willing to pay a premium for high data routing security guarantees. NASR can detect for such violations and make corrections promptly.
 
-Compared to the first and second use case, this use case requires some preventive measures before a wrongful forwarding takes place, preferably.
+Compared to the first and second use case, this use case also requires some preventive measures before a wrongful forwarding happens at the first place.
 
 
 ## Use Case 4: Trustworthy Telemetry
 
-The current telemetry result is based on the security assumption that devices will submit truthfully. As the security infrastructure such as RATS are building up, NASR can utilize RATS-attested devices to create trustworthy telemetry results of a path.
+The current telemetry result is based on the security assumption that devices will submit their information truthfully. As the security infrastructure such as RATS are building up, NASR can utilize RATS-attested devices to create trustworthy telemetry results of a path.
 
 Compared to other use cases, this use case may not need attestation before the measurement.
 
