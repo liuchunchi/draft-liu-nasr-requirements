@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-08T00:50:36.432238+00:00",
+  "timestamp": "2024-02-11T00:55:08.150428+00:00",
   "repo": "liuchunchi/draft-liu-nasr-requirements",
   "labels": [
     {
@@ -49,6 +49,50 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
-  "pulls": []
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOLPFeM85-xO-_",
+      "title": "Intra vs Inter domain",
+      "url": "https://github.com/liuchunchi/draft-liu-nasr-requirements/issues/2",
+      "state": "OPEN",
+      "author": "Iannone-Luigi",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The draft contains the question whether NASR should go for an intra-domain solution or an inter-domain solution. May be we can base the discussion on the notion of \"limited domains\" (RFC8799)? ",
+      "createdAt": "2024-02-09T10:14:25Z",
+      "updatedAt": "2024-02-09T10:18:13Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOLPFeM85mdv7P",
+      "title": "Added some text and fixed some typos",
+      "url": "https://github.com/liuchunchi/draft-liu-nasr-requirements/pull/1",
+      "state": "OPEN",
+      "author": "Iannone-Luigi",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-02-09T10:12:07Z",
+      "updatedAt": "2024-02-09T10:12:08Z",
+      "baseRepository": "liuchunchi/draft-liu-nasr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "4ea0858c32a10877c36ce17b0c215199c4137393",
+      "headRepository": "Iannone-Luigi/draft-liu-nasr-requirements",
+      "headRefName": "main",
+      "headRefOid": "cd92613142cf1f4a668c25ff982bcaee30501da5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
