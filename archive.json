@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-27T00:50:24.491722+00:00",
+  "timestamp": "2024-02-29T00:50:42.285914+00:00",
   "repo": "liuchunchi/draft-liu-nasr-requirements",
   "labels": [
     {
@@ -55,16 +55,24 @@
       "id": "I_kwDOLPFeM85-xO-_",
       "title": "Intra vs Inter domain",
       "url": "https://github.com/liuchunchi/draft-liu-nasr-requirements/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Iannone-Luigi",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The draft contains the question whether NASR should go for an intra-domain solution or an inter-domain solution. May be we can base the discussion on the notion of \"limited domains\" (RFC8799)? ",
       "createdAt": "2024-02-09T10:14:25Z",
-      "updatedAt": "2024-02-09T10:18:13Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-02-27T07:10:03Z",
+      "closedAt": "2024-02-27T07:10:03Z",
+      "comments": [
+        {
+          "author": "liuchunchi",
+          "authorAssociation": "OWNER",
+          "body": "limited domain is a good starting point for the initial scope, thanks for the pointers, i will add it.",
+          "createdAt": "2024-02-27T07:10:03Z",
+          "updatedAt": "2024-02-27T07:10:03Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -87,6 +95,32 @@
       "headRepository": "Iannone-Luigi/draft-liu-nasr-requirements",
       "headRefName": "main",
       "headRefOid": "cd92613142cf1f4a668c25ff982bcaee30501da5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOLPFeM85oOxxV",
+      "title": "Changes proposed by D.Lopez and A.Pastor",
+      "url": "https://github.com/liuchunchi/draft-liu-nasr-requirements/pull/3",
+      "state": "OPEN",
+      "author": "dr2lopez",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Changes proposed by Diego Lopez and Antonio Pastor - Telefonica\r\nInclude mentions to Ordered POT (OPOT)\r\nGeneral proposals for improvement",
+      "createdAt": "2024-02-28T23:39:31Z",
+      "updatedAt": "2024-02-28T23:39:31Z",
+      "baseRepository": "liuchunchi/draft-liu-nasr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "4ea0858c32a10877c36ce17b0c215199c4137393",
+      "headRepository": "dr2lopez/draft-liu-nasr-requirements",
+      "headRefName": "patch-1",
+      "headRefOid": "609c698dc484364baf44735a9d8a6a2f2d46426e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
