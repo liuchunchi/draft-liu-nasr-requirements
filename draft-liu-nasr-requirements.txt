@@ -4,8 +4,8 @@
 
 Network Working Group                                             C. Liu
 Internet-Draft                                                    Huawei
-Intended status: Informational                           8 February 2024
-Expires: 11 August 2024
+Intended status: Informational                              1 March 2024
+Expires: 2 September 2024
 
 
                      NASR Use Case and Requirements
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 August 2024.
+   This Internet-Draft will expire on 2 September 2024.
 
 Copyright Notice
 
@@ -480,9 +480,9 @@ Table of Contents
               Voit, E., Gaddam, C. R., Fedorkow, G., Birkholz, H., and
               M. Chen, "Trusted Path Routing", Work in Progress,
               Internet-Draft, draft-voit-rats-trustworthy-path-routing-
-              08, 28 August 2023,
+              09, 22 February 2024,
               <https://datatracker.ietf.org/doc/html/draft-voit-rats-
-              trustworthy-path-routing-08>.
+              trustworthy-path-routing-09>.
 
    [RFC2828]  Shirey, R., "Internet Security Glossary", RFC 2828,
               DOI 10.17487/RFC2828, May 2000,
