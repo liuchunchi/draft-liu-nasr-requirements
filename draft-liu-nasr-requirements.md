@@ -125,27 +125,27 @@ The network element is not limited to Service Function-- it can also be devices 
 
 ## Use Case 2: Verifying Path Properties
 
-In use case 1, The orchestrated path is explicit and specific down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a property at the path level, such as trustworthiness, security level, location, vendor, etc, which is collectively defined by all the elements on the path. The clients will also need a verifiable and non-forgeable proof at the path level, in a collective way. 
+In use case 1, The orchestrated path is explicit and specific down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a property at the path level, such as trustworthiness, security level, location, vendor, etc, which is collectively defined by all the elements on the path. The clients will also need a verifiable and non-forgeable proof at the path level, in a collective way.
 
 Compared to the first use case, the order of the elements may not be important. This use case is more focused on validating the attributes of the path, rather than a very specific ordered path. In other words, make sure that traffic goes trough forwarding elements that comply with required properties.
 
 ## Use Case 3: Sensitive Data Routing
 
-Clients from specific industries such as finance, governments have very low tolerance of data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some data protection regulations require that customer data never escape a specific geolocation without explicit permission. To avoid data leakage risks and law compliance risks, some clients are willing to pay a premium for high data routing security guarantees. One of the target of NASR is to provide means to detect such violations so to address them promptly. 
+Clients from specific industries such as finance, governments have very low tolerance of data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some data protection regulations require that customer data never escape a specific geolocation without explicit permission. To avoid data leakage risks and law compliance risks, some clients are willing to pay a premium for high data routing security guarantees. One of the target of NASR is to provide means to detect such violations so to address them promptly.
 
 Compared to the first and second use case, this use case requires some preventive measures before a wrongful forwarding takes place, preferably
 
 ## Use Case 4: Ingress Filtering
 
 
-Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks ({{RFC8704}}, {{RFC5635}}). It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate. Furthermore, when uRPF is not available and source address cannot be trusted, NASR can offer a way to filter malicious traffic based the path used to carry out such an attack {{Yaar03}}.  
+Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks ({{RFC8704}}, {{RFC5635}}). It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate. Furthermore, when uRPF is not available and source address cannot be trusted, NASR can offer a way to filter malicious traffic based the path used to carry out such an attack {{Yaar03}}.
 
 
 
 # Requirements {#requirements}
 
 
-Based on the main use-cases described in the previous section the following requirements are identified. 
+Based on the main use-cases described in the previous section the following requirements are identified.
 
 ## Requirement 1: Proof-of-Transit (POT) Mechanisms {#reqpot}
 
