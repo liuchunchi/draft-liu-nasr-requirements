@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-02-29T00:50:42.285914+00:00",
+  "timestamp": "2024-03-03T00:53:37.549652+00:00",
   "repo": "liuchunchi/draft-liu-nasr-requirements",
   "labels": [
     {
@@ -107,24 +107,26 @@
       "id": "PR_kwDOLPFeM85oOxxV",
       "title": "Changes proposed by D.Lopez and A.Pastor",
       "url": "https://github.com/liuchunchi/draft-liu-nasr-requirements/pull/3",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "dr2lopez",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Changes proposed by Diego Lopez and Antonio Pastor - Telefonica\r\nInclude mentions to Ordered POT (OPOT)\r\nGeneral proposals for improvement",
       "createdAt": "2024-02-28T23:39:31Z",
-      "updatedAt": "2024-02-28T23:39:31Z",
+      "updatedAt": "2024-03-01T12:30:30Z",
       "baseRepository": "liuchunchi/draft-liu-nasr-requirements",
       "baseRefName": "main",
       "baseRefOid": "4ea0858c32a10877c36ce17b0c215199c4137393",
       "headRepository": "dr2lopez/draft-liu-nasr-requirements",
       "headRefName": "patch-1",
       "headRefOid": "609c698dc484364baf44735a9d8a6a2f2d46426e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-01T12:30:30Z",
+      "mergedAt": "2024-03-01T12:30:30Z",
+      "mergedBy": "liuchunchi",
+      "mergeCommit": {
+        "oid": "6433e520c470855a68f629ce48ee62d5f64e7421"
+      },
       "comments": [],
       "reviews": []
     }
