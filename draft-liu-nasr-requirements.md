@@ -205,7 +205,7 @@ After a path is selected, it should be
   1. commited to prevent changes,
   2. publicized for common referencing and retrival.
 
-The stored path should contain these information: unique ID, all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
+The stored path should contain these information: unique ID (within a domain), all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
 
 
 TBA
@@ -241,6 +241,8 @@ The mailing list and side meeting has received requests to this requirement, it 
 Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Flexible orchestration of paths will be prohibited. Also, even static routing is used, we still need proof of transit for compliance check.
 
 ## Initially targeting for intra-domain or inter-domain scenario?
+
+Limited domain with some trust assumptions and controls to devices will be easy to start with. Then we can go do the interdomain.
 
 ## Does tunneling solve the problem?
 

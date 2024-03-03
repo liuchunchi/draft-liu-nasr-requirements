@@ -148,12 +148,16 @@ Ingress Filtering techniques, such as uRPF, help prevent source IP address spoof
 (TBA: To add an architecture diagram integrating below components and show basic interactive flows)
 -->
 
+<!-- PCL: Agree -->
+
 Based on the main use-cases described in the previous section the following requirements are identified. 
 
 ## Requirement 1: Proof-of-Transit (POT) Mechanisms {#reqpot}
 
 <!-- LUIGI: "DID" is not compliant with RFC 2119 and RFC8174 I've put an highlight marking .. -->
 All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet _did_ transit certain network elements. A secure POT mechanism should truthfully reflect the identity of the network element and its attributes. The "attribute" could be different:
+
+<!-- PCL: Accepted your revisions. -->
 
  - For simple POT, the "attribute" means the path it is on, and its relative position/order on the path. This is the goal of POT mechanism defined in {{-CISCOPOT}}.
 
@@ -215,6 +219,8 @@ The stored path should contain these information: unique ID, all network element
 
 <!-- LUIGI: Why do you need a unique (universal ID)? It has to be unique in the domain NASR is used but not globally unique Internet wide... -->
 
+<!-- PCL: You are right, it should be within a domain... Adding.  -->
+
 TBA
 
 
@@ -250,6 +256,8 @@ Static routing severely limits the scalability and flexibility for performance o
 ## Initially targeting for intra-domain or inter-domain scenario?
 
 <!--LUIGI: Why not using "limited domains" RFC8799? (at least initially)-->
+
+<!-- PCL: Good idea -->
 
 ## Does tunneling solve the problem?
 
