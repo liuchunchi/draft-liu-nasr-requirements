@@ -28,11 +28,11 @@ author:
     name: Chunchi Liu
     organization: Huawei
     email: liuchunchi@huawei.com
- -
-  ins: L. Iannone
-  name: Luigi Iannone
-  organization: Huawei
-  email: luigi.iannone@huawei.com
+    street: 101 Ruanjian Ave
+    city: Nanjing
+    code: 210012
+    country: China
+
 
 normative:
   RFC2119:
@@ -125,31 +125,39 @@ The network element is not limited to Service Function-- it can also be devices 
 
 ## Use Case 2: Verifying Path Properties
 
-In use case 1, The orchestrated path is explicit and specific down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a property at the path level, such as trustworthiness, security level, location, vendor, etc, which is collectively defined by all the elements on the path. The clients will also need a verifiable and non-forgeable proof at the path level, in a collective way.
+In use case 1, The orchestrated path is explicit and specific down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a property at the path level, such as trustworthiness, security level, location, vendor, etc, which is collectively defined by all the elements on the path. The clients will also need a verifiable and non-forgeable proof at the path level, in a collective way. 
 
 Compared to the first use case, the order of the elements may not be important. This use case is more focused on validating the attributes of the path, rather than a very specific ordered path. In other words, make sure that traffic goes trough forwarding elements that comply with required properties.
 
 ## Use Case 3: Sensitive Data Routing
 
-Clients from specific industries such as finance, governments have very low tolerance of data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some data protection regulations require that customer data never escape a specific geolocation without explicit permission. To avoid data leakage risks and law compliance risks, some clients are willing to pay a premium for high data routing security guarantees. One of the target of NASR is to provide means to detect such violations so to address them promptly.
+Clients from specific industries such as finance, governments have very low tolerance of data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some data protection regulations require that customer data never escape a specific geolocation without explicit permission. To avoid data leakage risks and law compliance risks, some clients are willing to pay a premium for high data routing security guarantees. One of the target of NASR is to provide means to detect such violations so to address them promptly. 
 
 Compared to the first and second use case, this use case requires some preventive measures before a wrongful forwarding takes place, preferably
 
 ## Use Case 4: Ingress Filtering
 
 
-Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks ({{RFC8704}}, {{RFC5635}}). It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate. Furthermore, when uRPF is not available and source address cannot be trusted, NASR can offer a way to filter malicious traffic based the path used to carry out such an attack {{Yaar03}}.
+Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks ({{RFC8704}}, {{RFC5635}}). It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate. Furthermore, when uRPF is not available and source address cannot be trusted, NASR can offer a way to filter malicious traffic based the path used to carry out such an attack {{Yaar03}}.  
 
 
 
 # Requirements {#requirements}
 
+<!-- LUIGI: the NASR Architecture should go in an architectural document. What do you think?
+(TBA: To add an architecture diagram integrating below components and show basic interactive flows)
+-->
 
-Based on the main use-cases described in the previous section the following requirements are identified.
+<!-- PCL: Agree -->
+
+Based on the main use-cases described in the previous section the following requirements are identified. 
 
 ## Requirement 1: Proof-of-Transit (POT) Mechanisms {#reqpot}
 
+<!-- LUIGI: "DID" is not compliant with RFC 2119 and RFC8174 I've put an highlight marking .. -->
 All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet _did_ transit certain network elements. A secure POT mechanism should truthfully reflect the identity of the network element and its attributes. The "attribute" could be different:
+
+<!-- PCL: Accepted your revisions. -->
 
  - For simple POT, the "attribute" means the path it is on, and its relative position/order on the path. This is the goal of POT mechanism defined in {{-CISCOPOT}}.
 
@@ -160,6 +168,8 @@ According to use case 2, the granularity of POT may also differ. POT can be gene
 
 The most appropriate POT mechanism for each scenarios may differ-- inter-domain or intra-domain, with or without a pre-attest, per-packet or on-demand, privacy-preserving or not, etc.
 
+[//]: # "Due to similarity of topic, NASR will consult PANRG for usable POT mechanisms and CFRG for reviews."
+<!--LUIGI: This last statement has to go in the charter ;-) -->
 
 ### Per-hop POT header extensions
 
@@ -205,8 +215,11 @@ After a path is selected, it should be
   1. commited to prevent changes,
   2. publicized for common referencing and retrival.
 
-The stored path should contain these information: unique ID (within a domain), all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
+The stored path should contain these information: unique ID, all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
 
+<!-- LUIGI: Why do you need a unique (universal ID)? It has to be unique in the domain NASR is used but not globally unique Internet wide... -->
+
+<!-- PCL: You are right, it should be within a domain... Adding.  -->
 
 TBA
 
@@ -242,7 +255,9 @@ Static routing severely limits the scalability and flexibility for performance o
 
 ## Initially targeting for intra-domain or inter-domain scenario?
 
-Limited domain with some trust assumptions and controls to devices will be easy to start with. Then we can go do the interdomain.
+<!--LUIGI: Why not using "limited domains" RFC8799? (at least initially)-->
+
+<!-- PCL: Good idea -->
 
 ## Does tunneling solve the problem?
 
@@ -253,7 +268,7 @@ Whether the validation is strict or loose is dependent on the scenario. For exam
 
 # Contributors
 
-This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Diego Lopez, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
+This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Diego Lopez, Luigi Iannone, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
 
 Please create **Github issues** to comment, or raise a question.
 Please create new commits and **Github Pull Requests** to propose new contents.
