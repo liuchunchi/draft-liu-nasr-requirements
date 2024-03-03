@@ -144,11 +144,15 @@ Ingress Filtering techniques, such as uRPF, help prevent source IP address spoof
 
 # Requirements {#requirements}
 
+<!-- LUIGI: the NASR Architecture should go in an architectural document. What do you think?
+(TBA: To add an architecture diagram integrating below components and show basic interactive flows)
+-->
 
 Based on the main use-cases described in the previous section the following requirements are identified. 
 
 ## Requirement 1: Proof-of-Transit (POT) Mechanisms {#reqpot}
 
+<!-- LUIGI: "DID" is not compliant with RFC 2119 and RFC8174 I've put an highlight marking .. -->
 All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet _did_ transit certain network elements. A secure POT mechanism should truthfully reflect the identity of the network element and its attributes. The "attribute" could be different:
 
  - For simple POT, the "attribute" means the path it is on, and its relative position/order on the path. This is the goal of POT mechanism defined in {{-CISCOPOT}}.
@@ -160,6 +164,8 @@ According to use case 2, the granularity of POT may also differ. POT can be gene
 
 The most appropriate POT mechanism for each scenarios may differ-- inter-domain or intra-domain, with or without a pre-attest, per-packet or on-demand, privacy-preserving or not, etc.
 
+[//]: # "Due to similarity of topic, NASR will consult PANRG for usable POT mechanisms and CFRG for reviews."
+<!--LUIGI: This last statement has to go in the charter ;-) -->
 
 ### Per-hop POT header extensions
 
@@ -207,6 +213,7 @@ After a path is selected, it should be
 
 The stored path should contain these information: unique ID, all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
 
+<!-- LUIGI: Why do you need a unique (universal ID)? It has to be unique in the domain NASR is used but not globally unique Internet wide... -->
 
 TBA
 
@@ -241,6 +248,8 @@ The mailing list and side meeting has received requests to this requirement, it 
 Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Flexible orchestration of paths will be prohibited. Also, even static routing is used, we still need proof of transit for compliance check.
 
 ## Initially targeting for intra-domain or inter-domain scenario?
+
+<!--LUIGI: Why not using "limited domains" RFC8799? (at least initially)-->
 
 ## Does tunneling solve the problem?
 
