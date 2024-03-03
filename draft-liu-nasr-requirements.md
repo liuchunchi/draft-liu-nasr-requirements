@@ -24,15 +24,25 @@ venue:
 
 author:
  -
-    ins: C. Liu
-    name: Chunchi Liu
-    organization: Huawei
-    email: liuchunchi@huawei.com
+  ins: C. Liu
+  name: Chunchi Liu
+  organization: Huawei
+  email: liuchunchi@huawei.com
  -
   ins: L. Iannone
   name: Luigi Iannone
   organization: Huawei
   email: luigi.iannone@huawei.com
+ -
+  ins: D. Lopez
+  name: Diego Lopez
+  organization: Telefonica
+  email: "diego.r.lopez@telefonica.com"
+ -
+  ins: A. Pastor
+  name: Antonio Pastor
+  organization: Telefonica
+  email: "antonio.pastorperales@telefonica.com"
 
 normative:
   RFC2119:
@@ -40,12 +50,13 @@ normative:
   RFC7643:
   RFC7519:
   RFC7011:
+  RFC8704:
+  RFC792:
 
 informative:
   RFC4593:
   RFC2828:
   RFC5635:
-  RFC8704:
   I-D.ietf-sfc-proof-of-transit-08: CISCOPOT
   I-D.liu-path-validation-problem-statement: PV
   I-D.chen-secure-routing-use-cases-00: SECROUT
@@ -69,19 +80,17 @@ This document describes the use cases and requirements that guide the specificat
 
 This document outlines the use cases and requirements that guide the specification of a Network Attestation for Secure Routing framework (NASR).
 
-NASR is targeted to help attest to a specific network path and verify if actual forwarding result is compliant to this path. This network path can be both an underlay path consists of physical devices or a virtual path consists of virtual network functions.
-
+NASR is targeted to help attest a specific network path and verify if actual forwarding result is compliant to the attested path and attributes. The components of this network path can be any combination of physical devices and links, and virtual links and virtual network functions. The target network path can correspond to a network overlay, or to an underlay supporting it, at any level in the applicable overlay recursion hierarchy.
 
 ## Note for NASR participants
 
 This document collates and synthesizes discussion outcomes of NASR mailing list and IETF 118 path validation side meeting.
 
 It is created to help
-
   1. Foster consensus among list members.
   2. Orient non-list members to NASR goals and current progress
 
-This document may become a WG-draft but stay informational.
+This document may become a WG-draft but will stay as an informational draft.
 
 # Terminology {#term}
 
@@ -121,24 +130,23 @@ We summarize the terms discussed in the list.
 
 Explicit routing protocols permit explicit control over the traffic path, in order to meet certain performance, security or compliance requirements. For example, operators can use SRv6 to orchestrate a Service Function Chaining (SFC) path and provide packaged security services or compliance services. For either of them, validating the actual traffic path in the forwarding plane as an auditing measure is needed for clients and/or authorities. NASR can help operator to attest to an orchestrated path and provide verifiable forwarding proofs to help clients/authorities audit the service.
 
-The network element is not limited to Service Function-- it can also be devices that has certain built-in security capabilities (or other attributes), or workloads. Hence the path is not limited to a SFC path.
+SFC is used as an (possibly canon cal) example, therefor network elements are not limited to Service Functions, and paths are not limited to a SFC path. Other devices or network functions may incorporate features (built-in security capabilities, roots of trust and attestation mechanisms, etc.) suitable to support path validation.
 
 ## Use Case 2: Verifying Path Properties
 
-In use case 1, The orchestrated path is explicit and specific down to each network element. Sometimes, the client does not need to know every detail. Rather, the clients will request a property at the path level, such as trustworthiness, security level, location, vendor, etc, which is collectively defined by all the elements on the path. The clients will also need a verifiable and non-forgeable proof at the path level, in a collective way.
+In use case 1, the orchestrated path is explicit and specific down to each network element. Sometimes, clients do not need to know every detail of the network path. Rather, clients will request the verification of a certain property within the path, such as trustworthiness, security level, geolocation, vendor characteristics, transit provider, etc. from the operator. Using NASR, the operator can orchestrate this path by selecting network elements and links with the requested properties, attest to the path, and verifiably prove to clients the path properties and that the traffic did follow this path.
 
-Compared to the first use case, the order of the elements may not be important. This use case is more focused on validating the attributes of the path, rather than a very specific ordered path. In other words, make sure that traffic goes trough forwarding elements that comply with required properties.
+In both this and the previous case, the order of the elements in the path may not be important, as the requests may be limited to a set of attributes for the path nodes, or the guarantee that traffic traversed a certain (set of) node(s).
 
 ## Use Case 3: Sensitive Data Routing
 
-Clients from specific industries such as finance, governments have very low tolerance of data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some data protection regulations require that customer data never escape a specific geolocation without explicit permission. To avoid data leakage risks and law compliance risks, some clients are willing to pay a premium for high data routing security guarantees. One of the target of NASR is to provide means to detect such violations so to address them promptly.
+Clients from specific industries such as finance or governments have very low tolerance to data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some compliance requirements also prohibit customer data escape a specific geolocation without permission. To avoid data leakage and compliance risks, some clients are willing to pay a premium for high data routing security guarantees. NASR can detect such violations and make corrections promptly, therefore supporting SLAs incorporating these guarantees.
 
-Compared to the first and second use case, this use case requires some preventive measures before a wrongful forwarding takes place, preferably
+Compared to the first and second use case, this use case also requires some preventive measures before a wrongful forwarding happens at the first place.
 
 ## Use Case 4: Ingress Filtering
 
-
-Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks ({{RFC8704}}, {{RFC5635}}). It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate. Furthermore, when uRPF is not available and source address cannot be trusted, NASR can offer a way to filter malicious traffic based the path used to carry out such an attack {{Yaar03}}.
+Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks {{RFC8704}}{{RFC5635}}. It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate.
 
 
 
@@ -149,14 +157,13 @@ Based on the main use-cases described in the previous section the following requ
 
 ## Requirement 1: Proof-of-Transit (POT) Mechanisms {#reqpot}
 
-All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet _did_ transit certain network elements. A secure POT mechanism should truthfully reflect the identity of the network element and its attributes. The "attribute" could be different:
+All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet DID transit certain network elements, and it can include a verification of the order in which those elements where transited (Ordered POT, OPoO) or not. A secure POT mechanism should verifiably reflect the identity of the transited network elements and their relevant attributes, if applicable:
 
- - For simple POT, the "attribute" means the path it is on, and its relative position/order on the path. This is the goal of POT mechanism defined in {{-CISCOPOT}}.
+ - For basic POT, there is no further attribute than the identity of the transited element and, optionally, its relative position/order within the path. This is the goal of the POT mechanism defined in {{-CISCOPOT}}.
 
- - For richer POT, the "attribute" means it could be a list of attributes: trustworthiness, security capabilities it has, geolocation, vendor, etc. This needs the definition of attributes of a network element, which is discussed in {{reqattributes}}
+ - For extended POT, different attributes can be considered from a list of relevant ones: trustworthiness measure, available security capabilities, geolocation, vendor, etc. This needs the definition of the relevant attributes of a network element, which is discussed in {{reqattributes}}
 
-
-According to use case 2, the granularity of POT may also differ. POT can be generated and recorded on a per-hop basis, or can be merged into one collective summary in the path level.
+According to use case 2, the granularity of POT may also differ. POT can be generated and recorded on a per-hop basis, or can be merged into one collective summary at the path level.
 
 The most appropriate POT mechanism for each scenarios may differ-- inter-domain or intra-domain, with or without a pre-attest, per-packet or on-demand, privacy-preserving or not, etc.
 
@@ -170,11 +177,12 @@ When the POT is passed along the path, it should be encapsulated in hop-by-hop h
 
 ### Out-of-band POT extensions
 
-For situations requiring real-time or near-real-time verification, out-of-band methods are needed to encapsulate and transmit POT. For example, traffic monitoring protocols like IPFIX {{RFC7011}}, SNMP, etc. Similarly, exact size and specifications of data fields are subject to different POT mechanisms.
+For situations requiring real-time or near-real-time verification, meaning some external security operation center (SOC) wishes to have real-time visibility of the forwarding path, out-of-band methods are needed to encapsulate and transmit POT. In this way, the SOC can verify the POT of each packet in order to make sure the forwarding is correct. For example, traffic monitoring protocols like IPFIX {{RFC7011}} or ICMP {{RFC792}}, specific management and control protocols, etc. Similarly, exact size and specifications of data fields are subject to different POT mechanisms.
+
 
 ## Requirement 2: Attributes of a network element {#reqattributes}
 
-The identity of a subject should be defined by the attributes (or claims) it owns. Attribute-defined identity is a paradigm widely accepted in SCIM {{RFC7643}}, OAuth {{RFC7519}}, SAML {{SAML2}}, etc. POT proof should reflect the identity and associated attributes, such as element type, security level, security capability it has, remote-attested or not, vendor, deployed geolocation, current timestamp, path it is on, hop index on the path etc.
+The identity of a subject should be defined by the attributes (or claims) it owns. Attribute-defined identity is a paradigm widely accepted in SCIM {{RFC7643}}, OAuth {{RFC7519}}, SAML {{SAML2}}, etc. POT proof should reflect the identity and associated attributes, such as element type, security level, security capability it has, remotely-attested or not, vendor, deployed geolocation, current timestamp, path it is on, hop index on the path etc.
 
 Such attributes/claims/attestation results can reuse existing specifications, for example {{-RATSEAT}}, {{-RATSRES}} in RATS WG. Some existing claims that we can reuse:
 
@@ -202,10 +210,10 @@ NASR could work closely with RATS on the standardization of above attributes and
 
 After a path is selected, it should be
 
-  1. commited to prevent changes,
-  2. publicized for common referencing and retrival.
+  1. Committed to prevent changes,
+  2. Publicized for common referencing and retrieval.
 
-The stored path should contain these information: unique ID (within a domain), all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
+The stored path should contain this information: unique ID (within a domain), all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
 
 
 TBA
@@ -215,21 +223,21 @@ TBA
 
 ## Non-Requirements 1: Proof-of-Non-Transit (PONT) Mechanisms
 
-Proof-of-Non-Transit (PONT) is a proof that a packet did NOT transit certain network elements. It is to the opposite to the Req. 1 Proof-of-Transit. Certain customers requested PONT for compliance or security purposes.
+Proof-of-Non-Transit (PONT) is a proof that a packet did NOT transit certain network elements. It is, essentially, the opposite to Req. 1 Proof-of-Transit. Certain potential user have expressed their interest on PONT for compliance or security purposes.
 
 First of all, PONT is a non-inclusion proof, and such non-existence proof cannot be directly given.
-Second, under certain circumstances, PONT can be _inferred_ from POT. For example, assume devices are perfectly secure and their behaviors completely compliant to expectations, then POT over A-B-C indicates the packet did not transit X/Y/Z. To relax the security assumptions, if the devices are remote attested and such claim is proved by POT, then the packet _should_ only transited these trusted devices, assuming the RATS procedure is secure. The reliability of such reasoning decreases as the security level of device decreases.
+Second, under certain circumstances, PONT can be _inferred_ from POT, especially when Ordered POT (OPOT) is enforced. For example, assume devices are perfectly secure and their behaviors completely compliant to expectations, then POT over A-B-C indicates the packet did not transit X/Y/Z. To relax the security assumptions, if the devices are remotely attested and such claim is proved by POT, then the packet _should_ only transited these trusted devices, assuming the RATS procedure is secure. The reliability of such reasoning decreases as the security level of device decreases.
 
-NASR mailing list has agreed NOT to provide PONT mechanisms, but could provide some informational measures and conditions that could indicate PONT from POT results. For example, under xxx constraints and circumstances, if traffic passed X AND Y (device or geolocation), then it did NOT (or with a quantifiable low probability it did not) pass Z.
+NASR mailing list has agreed NOT to provide PONT mechanisms, but could provide some informational measures and conditions that could indicate PONT from POT results. For example, under xxx constraints and circumstances, if traffic passed X AND Y (device or geolocation), then it did NOT (or with a quantifiably low probability it did not) pass Z.
 
-Since this part is research-related, NASR will work with PANRG and Academia for counseling.
+Since this part is research-related, NASR will work with PANRG and academia for counseling.
 
 
 ## Future Requirement 2: Packet Steering and Preventive Mechanisms
 
-In sensitive data routing use case, it is certainly necessary to know and verify the transit path of a packet using POT mechanisms. However, it might be too late to have the data already exposed to the insecure devices and risk leakage. There should be packet steering mechanisms or other preventive measures that help traffic stay in the desired path. For example, doing an egress check before sending to the next hop, preventing sending packet to a device with a non-desirable attribute.
+In the sensitive data routing use case, it is certainly necessary to know and verify the transit path of a packet using POT mechanisms. However, it might be too late to have the data already exposed to the insecure devices and risk leakage. There should be packet steering mechanisms or other preventive measures that help traffic stay in the desired path. For example, doing an egress check before sending to the next hop, preventing sending packet to a device with a non-desirable attribute.
 
-The mailing list and side meeting has received requests to this requirement, it should fall in NASR interest, but also agreed this may not be part of the initial scope of NASR-- it is a topic to be included in the next stage of NASR when rechartering.
+The mailing list and side meeting has received requests to this requirement, it should fall in NASR interest, but also agreed this may not be part of the initial scope of NASR-- it is a topic to be included in further stages of NASR, in case of a rechartering.
 
 
 # Commonly Asked Questions and Answers
@@ -238,7 +246,7 @@ The mailing list and side meeting has received requests to this requirement, it 
 
 ## Why not use static routing?
 
-Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Flexible orchestration of paths will be prohibited. Also, even static routing is used, we still need proof of transit for compliance check.
+Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Flexible orchestration of paths will be prohibited. Also, even when static routing is used, we still need proof of transit for compliance checks.
 
 ## Initially targeting for intra-domain or inter-domain scenario?
 
@@ -249,11 +257,11 @@ Limited domain with some trust assumptions and controls to devices will be easy 
 
 ## Does all nodes on the path need to compute the POT?
 
-Whether the validation is strict or loose is dependent on the scenario. For example in SFC use case, we are only interested in verifying some important elements of interes processed the traffic.
+Whether the validation is strict or loose depends on the scenario. For example, in SFC use cases, we are only interested in verifying some important elements of interest processed the traffic.
 
 # Contributors
 
-This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Diego Lopez, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
+This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
 
 Please create **Github issues** to comment, or raise a question.
 Please create new commits and **Github Pull Requests** to propose new contents.
