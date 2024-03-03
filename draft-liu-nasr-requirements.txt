@@ -3,9 +3,9 @@
 
 
 Network Working Group                                             C. Liu
-Internet-Draft                                                    Huawei
-Intended status: Informational                              1 March 2024
-Expires: 2 September 2024
+Internet-Draft                                                L. Iannone
+Intended status: Informational                                    Huawei
+Expires: 4 September 2024                                   3 March 2024
 
 
                      NASR Use Case and Requirements
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 September 2024.
+   This Internet-Draft will expire on 4 September 2024.
 
 Copyright Notice
 
@@ -85,7 +85,7 @@ Table of Contents
            Mechanisms
    8.  Commonly Asked Questions and Answers
      8.1.  Why not use static routing?
-     8.2.  Initially targeting for intradomain or interdomain
+     8.2.  Initially targeting for intra-domain or inter-domain
            scenario?
      8.3.  Does tunneling solve the problem?
      8.4.  Does all nodes on the path need to compute the POT?
@@ -95,7 +95,7 @@ Table of Contents
    12. References
      12.1.  Normative References
      12.2.  Informative References
-   Author's Address
+   Authors' Addresses
 
 1.  Introduction
 
@@ -113,8 +113,11 @@ Table of Contents
    This document collates and synthesizes discussion outcomes of NASR
    mailing list and IETF 118 path validation side meeting.
 
-   It is created to help 1.  Foster consensus among list members.  2.
-   Orient non-list members to NASR goals and current progress
+   It is created to help
+
+   1.  Foster consensus among list members.
+
+   2.  Orient non-list members to NASR goals and current progress
 
    This document may become a WG-draft but stay informational.
 
@@ -167,7 +170,7 @@ Table of Contents
    Service Function Chaining (SFC) path and provide packaged security
    services or compliance services.  For either of them, validating the
    actual traffic path in the forwarding plane as an auditing measure is
-   needed for clients and/or authorties.  NASR can help operator to
+   needed for clients and/or authorities.  NASR can help operator to
    attest to an orchestrated path and provide verifiable forwarding
    proofs to help clients/authorities audit the service.
 
@@ -178,18 +181,19 @@ Table of Contents
 
 5.2.  Use Case 2: Verifying Path Properties
 
-   In use case 1, The orchestrated path is explict and specfic down to
+   In use case 1, The orchestrated path is explicit and specific down to
    each network element.  Sometimes, the client does not need to know
-   every detail.  Rather, the clients will request a path of a certain
-   property, such as trustworthiness, security level, location, vendor,
-   etc, from the operator.  With NASR, the operator can orchestrate this
-   path by selecting network elements with requested properties, attest
-   to the path, and verifiably prove to the clients the traffic did
-   follow this path.
+   every detail.  Rather, the clients will request a property at the
+   path level, such as trustworthiness, security level, location,
+   vendor, etc, which is collectively defined by all the elements on the
+   path.  The clients will also need a verifiable and non-forgeable
+   proof at the path level, in a collective way.
 
    Compared to the first use case, the order of the elements may not be
    important.  This use case is more focused on validating the
-   attributes of the path.
+   attributes of the path, rather than a very specific ordered path.  In
+   other words, make sure that traffic goes trough forwarding elements
+   that comply with required properties.
 
 5.3.  Use Case 3: Sensitive Data Routing
 
@@ -197,39 +201,43 @@ Table of Contents
    very low tolerance of data leakage.  These clients require assurance
    that their data only travels on top of their selected leased line,
    MPLS VPN or SD-WAN path, and have (preferably real-time) visibility
-   evidence or proof.  Some compliance requirements also prohibit
-   customer data escape a specific geolocation without permission.  To
-   avoid data leakage risks and compliance risks, some clients are
-   willing to pay a premium for high data routing security guarantees.
-   NASR can detect for such violations and make corrections promptly.
+   evidence or proof.  Some data protection regulations require that
+   customer data never escape a specific geolocation without explicit
+   permission.  To avoid data leakage risks and law compliance risks,
+   some clients are willing to pay a premium for high data routing
+   security guarantees.  One of the target of NASR is to provide means
+   to detect such violations so to address them promptly.
 
-   Compared to the first and second use case, this use case also
-   requires some preventive measures before a wrongful forwarding
-   happens at the first place.
+   Compared to the first and second use case, this use case requires
+   some preventive measures before a wrongful forwarding takes place,
+   preferably
 
 5.4.  Use Case 4: Ingress Filtering
 
    Ingress Filtering techniques, such as uRPF, help prevent source IP
-   address spoofing and denial-of-service (DoS) attacks
-   [RFC8704][RFC5635].  It works by validating the source IP address of
-   a received packet by performing a reverse path lookup in FIB table,
-   all the way to the source.  If the path does not exist, the packet is
+   address spoofing and denial-of-service (DoS) attacks ([RFC8704],
+   [RFC5635]).  It works by validating the source IP address of a
+   received packet by performing a reverse path lookup in FIB table, all
+   the way to the source.  If the path does not exist, the packet is
    dropped.  NASR can be used to regularly validate the path stored in
    the FIB table, and tell if it continues to exist.  This can
-   potentially reduce the false negative rate.
+   potentially reduce the false negative rate.  Furthermore, when uRPF
+   is not available and source address cannot be trusted, NASR can offer
+   a way to filter malicious traffic based the path used to carry out
+   such an attack [Yaar03].
 
 6.  Requirements
 
-   (TBA: To add an architecture diagram integrating below components and
-   show basic interactive flows)
+   Based on the main use-cases described in the previous section the
+   following requirements are identified.
 
 6.1.  Requirement 1: Proof-of-Transit (POT) Mechanisms
 
    All use cases requested public verifiability of packet transit
-   history.  Proof-of-Transit (POT) is a proof that a packet DID transit
-   certain network elements.  A secure POT mechanism should truthfully
-   reflect the identity of the network element and its attributes.  The
-   "attribute" could be different:
+   history.  Proof-of-Transit (POT) is a proof that a packet _did_
+   transit certain network elements.  A secure POT mechanism should
+   truthfully reflect the identity of the network element and its
+   attributes.  The "attribute" could be different:
 
    *  For simple POT, the "attribute" means the path it is on, and its
       relative position/order on the path.  This is the goal of POT
@@ -276,7 +284,7 @@ Table of Contents
    accepted in SCIM [RFC7643], OAuth [RFC7519], SAML [SAML2], etc.  POT
    proof should reflect the identity and associated attributes, such as
    element type, security level, security capability it has, remote-
-   attestated or not, vendor, deployed geolocation, current timestamp,
+   attested or not, vendor, deployed geolocation, current timestamp,
    path it is on, hop index on the path etc.
 
    Such attributes/claims/attestation results can reuse existing
@@ -284,11 +292,15 @@ Table of Contents
    [I-D.ietf-rats-ar4si] in RATS WG.  Some existing claims that we can
    reuse:
 
-   hwmodel
-   hwversion
-   swname
-   swversion
-   location
+   *  hwmodel (Hardware Model)
+
+   *  hwversion (Hardware Version)
+
+   *  swname (Software Name )
+
+   *  swversion (Software Version)
+
+   *  location (location)
 
    Some new claim extensions can be made:
 
@@ -312,9 +324,9 @@ Table of Contents
 
    2.  publicized for common referencing and retrival.
 
-   The stored path should contain these information: univeral ID, all
-   network elements on the path, and attributes of them.  (Schemas may
-   vary depending on scenarios)
+   The stored path should contain these information: unique ID (within a
+   domain), all network elements on the path, and attributes of them.
+   (Schemas may vary depending on scenarios)
 
    TBA
 
@@ -333,7 +345,7 @@ Table of Contents
    perfectly secure and their behaviors completely compliant to
    expectations, then POT over A-B-C indicates the packet did not
    transit X/Y/Z.  To relax the security assumptions, if the devices are
-   remote attestated and such claim is proved by POT, then the packet
+   remote attested and such claim is proved by POT, then the packet
    _should_ only transited these trusted devices, assuming the RATS
    procedure is secure.  The reliability of such reasoning decreases as
    the security level of device decreases.
@@ -342,7 +354,7 @@ Table of Contents
    could provide some informational measures and conditions that could
    indicate PONT from POT results.  For example, under xxx constraints
    and circumstances, if traffic passed X AND Y (device or geolocation),
-   then it did NOT (or with a quantifiably low probability it did not)
+   then it did NOT (or with a quantifiable low probability it did not)
    pass Z.
 
    Since this part is research-related, NASR will work with PANRG and
@@ -375,7 +387,10 @@ Table of Contents
    orchestration of paths will be prohibited.  Also, even static routing
    is used, we still need proof of transit for compliance check.
 
-8.2.  Initially targeting for intradomain or interdomain scenario?
+8.2.  Initially targeting for intra-domain or inter-domain scenario?
+
+   Limited domain with some trust assumptions and controls to devices
+   will be easy to start with.  Then we can go do the interdomain.
 
 8.3.  Does tunneling solve the problem?
 
@@ -389,8 +404,8 @@ Table of Contents
 
    This document is made possible by NASR proponents, active mailing
    list members and side meeting participants.  Including but not
-   limited to: Andrew Alston, Meiling Chen, Diego Lopez, Luigi Iannone,
-   Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
+   limited to: Andrew Alston, Meiling Chen, Diego Lopez, Nicola
+   Rustignoli, Michael Richardson, Adnan Rashid and many others.
 
    Please create *Github issues* to comment, or raise a question.
    Please create new commits and *Github Pull Requests* to propose new
@@ -431,11 +446,6 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
-
-   [RFC8704]  Sriram, K., Montgomery, D., and J. Haas, "Enhanced
-              Feasible-Path Unicast Reverse Path Forwarding", BCP 84,
-              RFC 8704, DOI 10.17487/RFC8704, February 2020,
-              <https://www.rfc-editor.org/rfc/rfc8704>.
 
 12.2.  Informative References
 
@@ -497,17 +507,30 @@ Table of Contents
               RFC 5635, DOI 10.17487/RFC5635, August 2009,
               <https://www.rfc-editor.org/rfc/rfc5635>.
 
+   [RFC8704]  Sriram, K., Montgomery, D., and J. Haas, "Enhanced
+              Feasible-Path Unicast Reverse Path Forwarding", BCP 84,
+              RFC 8704, DOI 10.17487/RFC8704, February 2020,
+              <https://www.rfc-editor.org/rfc/rfc8704>.
+
    [SAML2]    "Assertions and Protocols for the OASIS Security Assertion
               Markup Language (SAML) V2.0", March 2005,
               <https://docs.oasis-open.org/security/saml/v2.0/saml-core-
               2.0-os.pdf>.
 
-Author's Address
+   [Yaar03]   Yaar, A., Perrig, A., and D. Song, "Pi: a path
+              identification mechanism to defend against DDoS attacks",
+              IEEE Comput. Soc, Proceedings 19th International
+              Conference on Data Engineering (Cat. No.03CH37405),
+              DOI 10.1109/secpri.2003.1199330, May 2004,
+              <https://doi.org/10.1109/secpri.2003.1199330>.
+
+Authors' Addresses
 
    Chunchi Liu
    Huawei
-   101 Ruanjian Ave
-   Nanjing
-   210012
-   China
    Email: liuchunchi@huawei.com
+
+
+   Luigi Iannone
+   Huawei
+   Email: luigi.iannone@huawei.com
