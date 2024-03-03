@@ -156,7 +156,7 @@ Compared to the first and second use case, this use case also requires some prev
 
 ## Use Case 4: Ingress Filtering
 
-Ingress Filtering techniques help prevent source IP address spoofing and denial-of-service (DoS) attacks {{RFC8704}}{{RFC5635}}. It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. The other usage is to check if a packet carries a valid trail of transit proofs. If it does then the packet is verified.
+Ingress Filtering techniques help prevent source IP address spoofing and denial-of-service (DoS) attacks {{RFC8704}}{{RFC5635}}. It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. Furthermore, when uRPF is not available and source address cannot be trusted, NASR can offer a way to filter malicious traffic based on the path used to carry out such an attack {{Yaar03}}. The other usage is to check if a packet carries a valid trail of transit proofs. If it does then the packet is verified. 
 
 
 # Requirements {#requirements}
