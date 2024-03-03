@@ -1375,7 +1375,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         <h3 id="name-use-case-4-ingress-filterin">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-use-case-4-ingress-filterin" class="section-name selfRef">Use Case 4: Ingress Filtering</a>
         </h3>
-<p id="section-5.4-1">Ingress Filtering techniques, such as uRPF, help prevent source IP address spoofing and denial-of-service (DoS) attacks <span>[<a href="#RFC8704" class="cite xref">RFC8704</a>]</span><span>[<a href="#RFC5635" class="cite xref">RFC5635</a>]</span>. It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. This can potentially reduce the false negative rate.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-1">Ingress Filtering techniques help prevent source IP address spoofing and denial-of-service (DoS) attacks <span>[<a href="#RFC8704" class="cite xref">RFC8704</a>]</span><span>[<a href="#RFC5635" class="cite xref">RFC5635</a>]</span>. It works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. The other usage is to check if a packet carries a valid trail of transit proofs. If it does then the packet is verified.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1552,7 +1552,7 @@ Second, under certain circumstances, PONT can be <em>inferred</em> from POT, esp
       <h2 id="name-contributors">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-contributors" class="section-name selfRef">Contributors</a>
       </h2>
-<p id="section-9-1">This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Nicola Rustignoli, Michael Richardson, Mingxing Liu, Adnan Rashid and many others.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <p id="section-9-2">Please create <strong>Github issues</strong> to comment, or raise a question.
 Please create new commits and <strong>Github Pull Requests</strong> to propose new contents.<a href="#section-9-2" class="pilcrow">¶</a></p>
 </section>
