@@ -28,11 +28,11 @@ author:
     name: Chunchi Liu
     organization: Huawei
     email: liuchunchi@huawei.com
-    street: 101 Ruanjian Ave
-    city: Nanjing
-    code: 210012
-    country: China
-
+ -
+  ins: L. Iannone
+  name: Luigi Iannone
+  organization: Huawei
+  email: luigi.iannone@huawei.com
 
 normative:
   RFC2119:
@@ -251,7 +251,7 @@ Whether the validation is strict or loose is dependent on the scenario. For exam
 
 # Contributors
 
-This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Diego Lopez, Luigi Iannone, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
+This document is made possible by NASR proponents, active mailing list members and side meeting participants. Including but not limited to: Andrew Alston, Meiling Chen, Diego Lopez, Nicola Rustignoli, Michael Richardson, Adnan Rashid and many others.
 
 Please create **Github issues** to comment, or raise a question.
 Please create new commits and **Github Pull Requests** to propose new contents.
