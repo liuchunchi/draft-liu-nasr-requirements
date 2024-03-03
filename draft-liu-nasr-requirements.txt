@@ -8,6 +8,9 @@ Intended status: Informational                                    Huawei
 Expires: 4 September 2024                                       D. Lopez
                                                                A. Pastor
                                                               Telefonica
+                                                                 M. Chen
+                                                                   L. Su
+                                                            China Mobile
                                                             3 March 2024
 
 
@@ -563,3 +566,13 @@ Authors' Addresses
    Antonio Pastor
    Telefonica
    Email: antonio.pastorperales@telefonica.com
+
+
+   Meiling Chen
+   China Mobile
+   Email: chenmeiling@chinamobile.com
+
+
+   Li Su
+   China Mobile
+   Email: suli@chinamobile.com
