@@ -43,6 +43,16 @@ author:
   name: Antonio Pastor
   organization: Telefonica
   email: "antonio.pastorperales@telefonica.com"
+ -
+  ins: M. Chen
+  name: Meiling Chen
+  organization: China Mobile
+  email: "chenmeiling@chinamobile.com"
+ -
+  ins: L. Su
+  name: Li Su
+  organization: China Mobile
+  email: "suli@chinamobile.com"
 
 normative:
   RFC2119:
