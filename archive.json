@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-03T00:53:37.549652+00:00",
+  "timestamp": "2024-03-05T00:50:50.506761+00:00",
   "repo": "liuchunchi/draft-liu-nasr-requirements",
   "labels": [
     {
@@ -57,7 +57,7 @@
       "url": "https://github.com/liuchunchi/draft-liu-nasr-requirements/issues/2",
       "state": "CLOSED",
       "author": "Iannone-Luigi",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "The draft contains the question whether NASR should go for an intra-domain solution or an inter-domain solution. May be we can base the discussion on the notion of \"limited domains\" (RFC8799)? ",
@@ -81,25 +81,35 @@
       "id": "PR_kwDOLPFeM85mdv7P",
       "title": "Added some text and fixed some typos",
       "url": "https://github.com/liuchunchi/draft-liu-nasr-requirements/pull/1",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "Iannone-Luigi",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-02-09T10:12:07Z",
-      "updatedAt": "2024-02-09T10:12:08Z",
+      "updatedAt": "2024-03-03T13:00:24Z",
       "baseRepository": "liuchunchi/draft-liu-nasr-requirements",
       "baseRefName": "main",
       "baseRefOid": "4ea0858c32a10877c36ce17b0c215199c4137393",
       "headRepository": "Iannone-Luigi/draft-liu-nasr-requirements",
       "headRefName": "main",
-      "headRefOid": "cd92613142cf1f4a668c25ff982bcaee30501da5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "d0612c176e59ed63641b4238ff0f8abb586eb143",
+      "closedAt": "2024-03-03T13:00:04Z",
+      "mergedAt": "2024-03-03T13:00:04Z",
+      "mergedBy": "liuchunchi",
+      "mergeCommit": {
+        "oid": "57f877d626c5fd061e9cf6f9e751dc343ad97a05"
+      },
+      "comments": [
+        {
+          "author": "liuchunchi",
+          "authorAssociation": "OWNER",
+          "body": "Hi Luigi, I have accepted your revisions, moved the comments to another separate file and replied your comments there, since <!--> has compile issues. \r\n\r\nI also added you as coauthors. Thanks for the comments and revisions! :) \r\n\r\nMerging the PR and submitting...",
+          "createdAt": "2024-03-03T13:00:23Z",
+          "updatedAt": "2024-03-03T13:00:23Z"
+        }
+      ],
       "reviews": []
     },
     {
