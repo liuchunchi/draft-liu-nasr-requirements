@@ -3,7 +3,7 @@ title: NASR Use Case and Requirements
 abbrev: nasr-req
 category: info
 
-docname: draft-liu-nasr-requirements-latest
+docname: draft-liu-nasr-requirements-02
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
