@@ -57,8 +57,6 @@ author:
 normative:
   RFC2119:
   RFC8174:
-  RFC7643:
-  RFC7519:
   RFC7011:
   RFC8704:
   RFC792:
@@ -73,10 +71,6 @@ informative:
   I-D.voit-rats-trustworthy-path-routing: TPR
   I-D.ietf-rats-eat: RATSEAT
   I-D.ietf-rats-ar4si: RATSRES
-  SAML2:
-    title: Assertions and Protocols for the OASIS Security Assertion Markup Language (SAML) V2.0
-    date: 2005-03
-    target: https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf
 
   Yaar03: DOI.10.1109/SECPRI.2003.1199330
 
@@ -90,11 +84,9 @@ This document describes the use cases and requirements that guide the specificat
 
 This document outlines the use cases and requirements that guide the specification of a Network Attestation for Secure Routing framework (NASR).
 
-NASR is targeted to help attest a specific network path and verify if actual forwarding result is compliant to the attested path and attributes. The components of this network path can be any combination of physical devices and links, and virtual links and virtual network functions. The target network path can correspond to a network overlay, or to an underlay supporting it, at any level in the applicable overlay recursion hierarchy.
-
 ## Note for NASR participants
 
-This document collates and synthesizes discussion outcomes of NASR mailing list and IETF 118 path validation side meeting.
+This document collates and synthesizes discussion outcomes of NASR mailing list and side meetings.
 
 It is created to help
   1. Foster consensus among list members.
@@ -108,28 +100,26 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 # Backgrounds {#back}
 
-TBA
+Clients with high security and privacy requirements are not anymore satisfied with traffic signing and encryption mechanisms only; they now request information of the trustworthiness or security properties of the network paths over which the traffic is carried, preferably to choose the desired properties. 
 
 # Definitions {#def}
 
 We summarize the terms discussed in the list.
 
-* NASR: Network Attestation For Secure Routing, a proposed framework that mainly does the following:
-  1. Attest to a network path
-  2. Verify actual forwarding path complies with the attested path
-  3. Prevent non-compliant forwarding (optional)
+* NASR: Network Attestation For Secure Routing, a technical framework to be proposed that mainly does the following:
+  1. Allow clients to choose desired security attributes of his received network service
+  2. Achieve dependable forwarding by routing on top of only devices that satisfies his trust requirements
+  3. Provide proof to the clients that certain packets or flows traversed a network path that has certain trust or security properties.
 
-[Details to be added]
-
-* Routing Security: {{RFC4593}}, {{RFC2828}}
+* Routing Security: Practices and protocols designed to protect the integrity, confidentiality, and availability of network routing information and processes. {{RFC4593}}, {{RFC2828}}
 
 * Path Validation: {{-PV}}
 
 * Secure Routing: {{-SECROUT}}
 
-* Proof-of-Transit: {{-CISCOPOT}}
+* Proof-of-Transit: A verifiable cryptographic tag proving data of specific granularity was processed by a network device. {{-CISCOPOT}}
 
-* Trustworthy Path Routing: {{-TPR}}
+* Trustworthy Path Routing: Path computation and routing according to the trustworthiness of a network device, in order to avoid less trustworthy, unsecure or risky devices. {{-TPR}}
 
 ...
 
@@ -140,7 +130,7 @@ We summarize the terms discussed in the list.
 
 Explicit routing protocols permit explicit control over the traffic path, in order to meet certain performance, security or compliance requirements. For example, operators can use SRv6 to orchestrate a Service Function Chaining (SFC) path and provide packaged security services or compliance services. For either of them, validating the actual traffic path in the forwarding plane as an auditing measure is needed for clients and/or authorities. NASR can help operator to attest to an orchestrated path and provide verifiable forwarding proofs to help clients/authorities audit the service.
 
-SFC is used as an (possibly canon cal) example, therefor network elements are not limited to Service Functions, and paths are not limited to a SFC path. Other devices or network functions may incorporate features (built-in security capabilities, roots of trust and attestation mechanisms, etc.) suitable to support path validation.
+SFC is used as an example, therefore network elements are not limited to Service Functions, and paths are not limited to a SFC path. Other devices or network functions may incorporate features (built-in security capabilities, roots of trust and attestation mechanisms, etc.) suitable to support path validation.
 
 ## Use Case 2: Verifying Path Properties
 
@@ -150,29 +140,64 @@ In both this and the previous case, the order of the elements in the path may no
 
 ## Use Case 3: Sensitive Data Routing
 
-Clients from specific industries such as finance or governments have very low tolerance to data leakage. These clients require assurance that their data only travels on top of their selected leased line, MPLS VPN or SD-WAN path, and have (preferably real-time) visibility evidence or proof. Some compliance requirements also prohibit customer data escape a specific geolocation without permission. To avoid data leakage and compliance risks, some clients are willing to pay a premium for high data routing security guarantees. NASR can detect such violations and make corrections promptly, therefore supporting SLAs incorporating these guarantees.
+Clients from specific industries such as finance or governments have very low tolerance to data leakage. These clients require assurance that their data only travels on top of their selected leased line and have (preferably real-time) verifiable evidence or proof. Some compliance requirements also prohibit customer data escape a specific geolocation without authorization. To avoid data leakage and compliance risks, some clients are willing to pay a premium for high data routing security guarantees. NASR can prevent and detect accidental violations and make corrections promptly, therefore supporting SLAs incorporating these guarantees.
 
 Compared to the first and second use case, this use case also requires some preventive measures before a wrongful forwarding happens at the first place.
 
-## Use Case 4: Ingress Filtering
+## Use Case 4: Sensitive data transmission due to remote AI training
+
+This use case is similar to Use Case 3 but is more specific. As AI trend rise, operators are investing in "AI training centers" for lease. Due to scalability and cost reduction considerations, training centers tend to be built separately from data centers. In manufacturing industry or other data-heavy industries, DCs or private storage is often built next to the campus. But in order to support training and utilize operator-running training centers, wide-area data transmission between DC and TC is needed. Enterprise clients, when faced with privacy-sensitive data leaving their DCs and go through wide-area transmission, are highly unhappy. Yet, it is also impractical for operators to build dedicated training centers next to the client DC. Without NASR guaranteeing dependable forwarding and non-leakage, the market sales of operator's training center business is hindered.
+
+## Use Case 5: Ingress Filtering
 
 Ingress Filtering techniques help prevent source IP address spoofing and denial-of-service (DoS) attacks {{RFC8704}}{{RFC5635}}. Approches like uRPF works by validating the source IP address of a received packet by performing a reverse path lookup in FIB table, all the way to the source. If the path does not exist, the packet is dropped. NASR can be used to regularly validate the path stored in the FIB table, and tell if it continues to exist. Furthermore, when uRPF is not available and source address cannot be trusted, NASR can offer a way to filter malicious traffic based on the path used to carry out such an attack {{Yaar03}}. The other usage is to check if a packet carries a valid trail of transit proofs. If it does then the packet is verified. 
 
 
 # Requirements {#requirements}
 
-
 Based on the main use-cases described in the previous section the following requirements are identified.
 
-## Requirement 1: Proof-of-Transit (POT) Mechanisms {#reqpot}
+## Requirement 1: Attributes of a network element, interfaces {#reqattributes}
 
-All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet DID transit certain network elements, and it can include a verification of the order in which those elements where transited (Ordered POT, OPoO) or not. A secure POT mechanism should verifiably reflect the identity of the transited network elements and their relevant attributes, if applicable:
+According to goal 1 of NASR definition, NASR (to-be) Working Group will define security/trustworthiness attributes of network elements, for clients to request from operators. Attributes should be objective claims, including but not limited to existing remotely-attested claims, element type (physical or virtual network element), security capability it enables, cryptographic algorithms, key strength, deployed geolocation, etc.
+
+Such attributes/claims/attestation results can reuse existing specifications, for example {{-RATSEAT}}, {{-RATSRES}} in RATS WG. Some existing claims that we can reuse:
+
+  - hwmodel (Hardware Model)
+  - hwversion (Hardware Version)
+  - swname (Software Name )
+  - swversion (Software Version)
+  - location (location)
+
+Some new claim extensions can be made:
+
+    elemtype
+    index
+    secfunctions
+    vendor
+    ...
+
+(subject to discussion, add, change)
+
+NASR could work closely with RATS on the standardization of above attributes and means of proving them.
+
+Additionally, service request interface between clients and operators should also be defined. 
+
+## Requirement 2: Path Attestation Procedures
+
+After a path attribute request is sent from the client to the operator, the operator will have to choose qualifying devices and orchestrate a path. According to the goal 2 of NASR definition, the path attestation procedure will be the core protocol of NASR. The procedure should be able to re-attest to the whole path and provide path-level attribute proofs (attestation results), proving the delivered path complies with client request, which should reuse RATS procedures. Details are being designed in the NASR architecture document. 
+
+
+## Requirement 3: Proof-of-Transit (POT) Mechanisms {#reqpot}
+
+
+All use cases requested public verifiability of packet transit history. Proof-of-Transit (POT) is a proof that a packet transited certain network elements, and it can include a verification of the order in which those elements where transited (Ordered POT, OPoT) or not. A secure POT mechanism should verifiably reflect the identity of the transited network elements and their relevant attributes, if applicable:
 
  - For basic POT, there is no further attribute than the identity of the transited element and, optionally, its relative position/order within the path. This is the goal of the POT mechanism defined in {{-CISCOPOT}}.
 
  - For extended POT, different attributes can be considered from a list of relevant ones: trustworthiness measure, available security capabilities, geolocation, vendor, etc. This needs the definition of the relevant attributes of a network element, which is discussed in {{reqattributes}}
 
-According to use case 2, the granularity of POT may also differ. POT can be generated and recorded on a per-hop basis, or can be merged into one collective summary at the path level.
+According to use case 2, the granularity of POT may also differ. POT can be generated and recorded on a per-hop basis, or can be aggregated into one collective summary at the path level.
 
 The most appropriate POT mechanism for each scenarios may differ-- inter-domain or intra-domain, with or without a pre-attest, per-packet or on-demand, privacy-preserving or not, etc.
 
@@ -186,46 +211,8 @@ When the POT is passed along the path, it should be encapsulated in hop-by-hop h
 
 ### Out-of-band POT extensions
 
-For situations requiring real-time or near-real-time verification, meaning some external security operation center (SOC) wishes to have real-time visibility of the forwarding path, out-of-band methods are needed to encapsulate and transmit POT. In this way, the SOC can verify the POT of each packet in order to make sure the forwarding is correct. For example, traffic monitoring protocols like IPFIX {{RFC7011}} or ICMP {{RFC792}}, specific management and control protocols, etc. Similarly, exact size and specifications of data fields are subject to different POT mechanisms.
+For situations requiring real-time or near-real-time verification, meaning some external security operation centers (SOC) wish to have real-time visibility of the forwarding path, out-of-band methods are needed to encapsulate and transmit POT. In this way, the SOC can verify the POT of each packet in order to make sure the forwarding is correct. For example, traffic monitoring protocols like IPFIX {{RFC7011}} or ICMP {{RFC792}}, specific management and control protocols, etc. Similarly, exact size and specifications of data fields are subject to different POT mechanisms.
 
-
-## Requirement 2: Attributes of a network element {#reqattributes}
-
-The identity of a subject should be defined by the attributes (or claims) it owns. Attribute-defined identity is a paradigm widely accepted in SCIM {{RFC7643}}, OAuth {{RFC7519}}, SAML {{SAML2}}, etc. POT proof should reflect the identity and associated attributes, such as element type, security level, security capability it has, remotely-attested or not, vendor, deployed geolocation, current timestamp, path it is on, hop index on the path etc.
-
-Such attributes/claims/attestation results can reuse existing specifications, for example {{-RATSEAT}}, {{-RATSRES}} in RATS WG. Some existing claims that we can reuse:
-
-  - hwmodel (Hardware Model)
-  - hwversion (Hardware Version)
-  - swname (Software Name )
-  - swversion (Software Version)
-  - location (location)
-
-Some new claim extensions can be made:
-
-    elemtype
-    pathid
-    index
-    secfunctions
-    vendor
-    ...
-
-(subject to discussion, add, change)
-
-NASR could work closely with RATS on the standardization of above attributes and means of proving them.
-
-
-## Requirement 3: Path Attestation Procedures
-
-After a path is selected, it should be
-
-  1. Committed to prevent changes,
-  2. Publicized for common referencing and retrieval.
-
-The stored path should contain this information: unique ID (within a domain), all network elements on the path, and attributes of them. (Schemas may vary depending on scenarios)
-
-
-TBA
 
 
 # Non-Requirements {#no-req}
@@ -253,16 +240,13 @@ The mailing list and side meeting has received requests to this requirement, it 
 
 (From side meeting and mailing list feedbacks, to be updated)
 
-## Why not use static routing?
-
-Static routing severely limits the scalability and flexibility for performance optimizations and reconfigurations. Flexible orchestration of paths will be prohibited. Also, even when static routing is used, we still need proof of transit for compliance checks.
-
 ## Initially targeting for intra-domain or inter-domain scenario?
 
-Limited domain with some trust assumptions and controls to devices will be easy to start with. Then we can go do the interdomain.
+Limited domain with some trust assumptions and controls to devices will be easy to start with, but inter-domain scenario will be critical for standardization.
 
 ## Does tunneling solve the problem?
 
+Tunnels, VPNs do not perceive the underlying network devices. Quality measurements can be done, but other detail information of bearing devices are not visible. 
 
 ## Does all nodes on the path need to compute the POT?
 
