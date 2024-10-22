@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T01:13:33.054833+00:00",
+  "timestamp": "2024-10-22T01:08:38.832201+00:00",
   "repo": "liuchunchi/draft-liu-nasr-requirements",
   "labels": [
     {
@@ -136,6 +136,34 @@
       "mergedBy": "liuchunchi",
       "mergeCommit": {
         "oid": "6433e520c470855a68f629ce48ee62d5f64e7421"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOLPFeM85_OYAr",
+      "title": "add forwarding baseline",
+      "url": "https://github.com/liuchunchi/draft-liu-nasr-requirements/pull/4",
+      "state": "MERGED",
+      "author": "liuchunchi",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "-add definition of forwarding baseline\r\n-explain path validation\r\n-a little bit of rewriting of use case 1\r\n-add requirement of forwarding baseline",
+      "createdAt": "2024-10-20T13:08:10Z",
+      "updatedAt": "2024-10-21T03:41:10Z",
+      "baseRepository": "liuchunchi/draft-liu-nasr-requirements",
+      "baseRefName": "main",
+      "baseRefOid": "1c548637d3901eb327e8bc7c719a976ff25fc166",
+      "headRepository": "liuchunchi/draft-liu-nasr-requirements",
+      "headRefName": "liuchunchi-patch-1",
+      "headRefOid": "4a95da78a6c5c0df122a05825eec905e715e1977",
+      "closedAt": "2024-10-21T03:41:09Z",
+      "mergedAt": "2024-10-21T03:41:09Z",
+      "mergedBy": "liuchunchi",
+      "mergeCommit": {
+        "oid": "efcf3f67b8aebedd95d49e958a8e06685f8c1d13"
       },
       "comments": [],
       "reviews": []
