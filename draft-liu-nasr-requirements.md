@@ -125,6 +125,14 @@ We summarize the terms discussed in the list.
 
 ...
 
+## Trust Models
+
+NASR is expected to operate in single administrative domain(s). 
+
+Case 1: NASR operate inside of one single limited domain as defined in {{RFC8799}}. In this case, within a confined network boundary, the operator maintains unified administrative control over device configurations through authenticated interfaces. All deployed devices in this environment utilize remote attestation capabilities.
+
+Case 2: NASR also operate between two limited domains. In this case, in addition to the assumptions mentioned above, the two limited domain operators establish mutual trust through other technical or non-technical channels, enabling collaborative delivery of consistent NASR functionality. For instance, end-to-end connectivity services can be delivered either through collaboration between two sub-operating units within a single telecommunications group, or through contractual partnerships between separate telecom operators.
+
 # Use Cases {#usecases}
 
 
@@ -240,7 +248,6 @@ Since this part is research-related, NASR will work with PANRG and academia for 
 In the sensitive data routing use case, it is certainly necessary to know and verify the transit path of a packet using POT mechanisms. However, it might be too late to have the data already exposed to the insecure devices and risk leakage. There should be packet steering mechanisms or other preventive measures that help traffic stay in the desired path. For example, doing an egress check before sending to the next hop, preventing sending packet to a device with a non-desirable attribute.
 
 The mailing list and side meeting has received requests to this requirement, it should fall in NASR interest, but also agreed this may not be part of the initial scope of NASR-- it is a topic to be included in further stages of NASR, in case of a rechartering.
-
 
 # Commonly Asked Questions and Answers
 
