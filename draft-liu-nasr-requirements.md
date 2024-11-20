@@ -127,9 +127,9 @@ We summarize the terms discussed in the list.
 
 ## Trust Models
 
-NASR is expected to operate in single administrative domain(s), in opposition of public Internets. 
+NASR is expected to operate in limited domains, in opposition of public Internets. 
 
-Case 1: NASR operates inside of one single limited domain as defined in {{RFC8799}}. In this case, within a confined network boundary, the operator maintains unified administrative control over device configurations through authenticated interfaces. All devices providing NASR services are equipped with basic RATS (Remote ATtestation) capabilities.
+Case 1: NASR operates inside of one single administrative limited domain as defined in {{RFC8799}}. In this case, within a confined network boundary, the operator maintains unified administrative control over device configurations through authenticated interfaces. All devices providing NASR services are equipped with basic RATS (Remote Attestation) capabilities.
 
 Case 2: NASR also operates between two limited domains. In this case, in addition to the assumptions mentioned above, the two limited domain operators establish mutual trust through other technical or non-technical channels, aiming to collaboratively deliver consistent NASR functionalities. For instance, end-to-end connectivity services can be delivered either through collaboration between two sub-operating units within a single telecommunications group, or through contractual partnerships between separate telecom operators.
 
